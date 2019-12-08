@@ -11,7 +11,7 @@ const main = (canvas) => {
   // mesh
   const box = new THREE.Mesh(
     new THREE.BoxGeometry(64, 64, 64),
-    new THREE.MeshNormalMaterial({ color: 0x6699FF })
+    new THREE.MeshNormalMaterial()
   );
   box.position.set(0, 0, 0);
   scene.add(box);
