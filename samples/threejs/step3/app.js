@@ -21,10 +21,14 @@ const main = (canvas) => {
   camera.position.set(200, 100, 300);
   camera.lookAt(scene.position);
 
+  // camera controls
+  var controls = new THREE.OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+
   // renderer
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setSize(width, height);
-  renderer.setClearColor(0xd0d0f0);
+  renderer.setClearColor(0xf0d0d0);
   renderer.setPixelRatio(window.devicePixelRatio);
 
   // animate
@@ -32,11 +36,8 @@ const main = (canvas) => {
     // next frame
     requestAnimationFrame(animate);
 
-    // rotate
-    const sec = Date.now() / 1000;
-    box.rotation.x = sec * (Math.PI / 4);
-    box.rotation.y = sec * (Math.PI / 4);
-    box.rotation.z = sec * (Math.PI / 4);
+    // required if controls.enableDamping or controls.autoRotate are set to true
+    controls.update();
 
     // render
     renderer.render(scene, camera);
