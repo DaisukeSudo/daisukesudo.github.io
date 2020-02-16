@@ -26,9 +26,9 @@ const main = (canvas) => {
   controls.enableDamping = true;
 
   // 5. renderer
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(width, height);
-  renderer.setClearColor(0xf0d0d0);
+  renderer.setClearColor(0xffffff, 0);
   renderer.setPixelRatio(window.devicePixelRatio);
 
   // 6. animate

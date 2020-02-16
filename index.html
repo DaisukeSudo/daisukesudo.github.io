@@ -1,28 +1,78 @@
 <!DOCTYPE html>
-<html lang="ja>
+<html lang="ja">
 <head>
-  <meta charset=" utf-8">
-<title>daisukesudo.github.io</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width"/>
+  <link rel="stylesheet" href="./css/style.css" type="text/css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
+  <title>daisukesudo.github.io</title>
 </head>
 
 <body>
-  <h1>Index</h1>
+  <header class="site-header">
+    <div class="site-logo">
+      <img class="site-logo__image" src="./img/logo.png" alt="logo"/>
+    </div>
+  </header>
 
-  <ul>
-    <li>
-      qiita<br />
-      <a href="https://qiita.com/dsudo">https://qiita.com/dsudo</a>
-    </li>
-    <li>
-      twitter<br />
-      <a href="https://twitter.com/_dsudo">https://twitter.com/_dsudo</a>
-    </li>
-    <li>
-      blogspot<br />
-      <a href="https://daisuke-sudo.blogspot.com/">https://daisuke-sudo.blogspot.com/</a>
-    </li>
-  </ul>
+  <section class="drawing-section">
+    <canvas class="rotating-box-canvas" width="200" height="200"></canvas>
+  </section>
 
+  <section class="nav-section">
+    <nav>
+      <ul class="nav-list">
+
+        <li class="nav-list-item">
+          <a href="https://www.codewars.com/users/dsudo">
+            <img src="https://api.iconify.design/simple-icons:codewars.svg?height=16"/>
+            <span>Codewars</span>
+          </a>
+        </li>
+
+        <li class="nav-list-item">
+          <a href="https://github.com/DaisukeSudo">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </a>
+        </li>
+
+        <li class="nav-list-item">
+          <a href="https://qiita.com/dsudo">
+            <i class="fa fa-search"></i>
+            <span>Qiita</span>
+          </a>
+        </li>
+
+        <li class="nav-list-item">
+          <a href="https://twitter.com/_dsudo">
+            <i class="fab fa-twitter"></i>
+            <span>Twitter</span>
+          </a>
+        </li>
+
+        <li class="nav-list-item">
+          <a href="https://daisuke-sudo.blogspot.com/">
+            <i class="fab fa-blogger"></i>
+            <span>Blogger</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  </section>
+
+  <footer class="site-footer">
+    <p class="copyright">Copyright 2020 Daisuke Sudo All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/three@0.111.0/build/three.js"></script>
+  <script src="./samples/threejs/step2/app.js"></script>
+  <script>
+    window.onload = () => {
+      main(document.querySelector(".rotating-box-canvas"));
+    }
+  </script>
 </body>
 
 </html>
