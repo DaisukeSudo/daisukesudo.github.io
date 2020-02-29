@@ -76,6 +76,10 @@ ul {
   text-align: center;
 }
 
+.drawing-section canvas {
+  outline: none;
+}
+
 .site-footer {
   margin-top: 40px;
   text-align: center;

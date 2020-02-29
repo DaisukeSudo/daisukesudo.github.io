@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja>
+<head>
+  <meta charset="utf-8">
+  <title>Hello Three.js World! Step3</title>
+  <style>
+    #main {
+      width: 480px;
+      height: 320px;
+      background-color: #f0f0d0;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="main"></canvas>
+  <script src="https://unpkg.com/three@0.111.0/build/three.js"></script>
+  <script src="https://unpkg.com/three@0.111.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="app.js"></script>
+  <script>
+    window.onload = () => main(document.querySelector("#main"));
+  </script>
+</body>
+</html>
