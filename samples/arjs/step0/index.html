@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <title>Hello A-Frame</title>
+  </head>
+
+  <body>
+    <a-scene>
+      <a-sky
+        color="#DDEEFF"
+      >
+      </a-sky>
+      <a-box
+        color="#4488FF"
+        position="0 0 0"
+        rotation="0 0 0"
+        animation="property: rotation; to: 360 360 0; dur: 4000; easing: linear; loop: true"
+      >
+      </a-box>
+      <a-camera
+        position="0 0 2"
+      >
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
