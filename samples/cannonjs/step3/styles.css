@@ -1,0 +1,75 @@
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  margin: 0;
+}
+
+.view {
+  height: 320px;
+  outline: auto;
+}
+
+.command {
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media screen and (min-width: 480px) {
+  .container {
+    width: 464px;
+    margin: 8px;
+  }
+}
+
+.links {
+  text-align: center;
+  padding: 16px;
+}
+
+.links a {
+  text-decoration: none;
+  color: #666;
+  font-size: 12px;
+  padding: 4px 8px;
+  margin: 0 8px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.links a:hover {
+  background-color: #666;
+  color: #fff;
+}
+
+.command button {
+  flex: 0 0 auto;
+  background-color: #AF4C60;
+  color: white;
+  padding: 8px 16px;
+  margin: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.command button:hover {
+  background-color: #a04559;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.command button:active {
+  background-color: #8e3e41;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  transform: translateY(2px);
+}
