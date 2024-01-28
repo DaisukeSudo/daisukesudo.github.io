@@ -1,0 +1,45 @@
+body, h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+}
+header {
+  background: url('header-bg.jpg') no-repeat center center/cover;
+  text-align: center;
+  padding: 2em 0;
+}
+header #icon-image {
+  max-width: 100px;
+  margin-bottom: 1em;
+}
+header h1 {
+  color: #333;
+}
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1em;
+  padding: 2em;
+}
+.image-gallery img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+section {
+  padding: 2em;
+}
+section h2 {
+  margin-bottom: 0.5em;
+}
+footer {
+  text-align: center;
+  padding: 1em 0;
+  background-color: #dcdcdc;
+  color: #999;
+}
