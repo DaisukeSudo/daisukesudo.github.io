@@ -1,0 +1,3 @@
+[tools]
+just = "1.59.0"
+miniserve = "0.35.0"
