@@ -18,24 +18,24 @@ const createPlaces = ({ latitude, longitude }) => [
 
 const models = [
   {
-    url: '#asset-eevee',
+    url: '#asset-fox',
     scale: ['0.5', '0.5', '0.5'],
-    info: 'Eevee',
+    info: 'Fox',
   },
   {
-    url: '#asset-jolteon',
+    url: '#asset-fox-yellow',
     scale: ['0.3', '0.3', '0.3'],
-    info: 'Jolteon',
+    info: 'Yellow Fox',
   },
   {
-    url: '#asset-vaporeon',
+    url: '#asset-fox-blue',
     scale: ['0.25', '0.25', '0.25'],
-    info: 'Vaporeon',
+    info: 'Blue Fox',
   },
   {
-    url: '#asset-flareon',
+    url: '#asset-fox-red',
     scale: ['0.25', '0.25', '0.25'],
-    info: 'Flareon',
+    info: 'Red Fox',
   },
 ];
 

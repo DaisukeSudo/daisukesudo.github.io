@@ -29,7 +29,7 @@ const renderPlace = ({ location }) => {
   const $scene = document.querySelector('a-scene');
   const $entity = createEntity({
     location,
-    model: '#asset-eevee',
+    model: '#asset-fox',
     scale: ['0.5', '0.5', '0.5'],
   });
   $scene.appendChild($entity);
