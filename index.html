@@ -1,79 +1,151 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="viewport" content="width=device-width"/>
-  <link rel="stylesheet" href="./css/style.css" type="text/css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
-  <title>daisukesudo.github.io</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daisuke Sudo</title>
+  <meta name="description" content="Daisuke Sudo のリンク集と、Three.js・AR.js・Cannon.js などで作ったサンプル。">
+  <meta name="theme-color" content="#0c0e12">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Daisuke Sudo">
+  <meta property="og:description" content="Daisuke Sudo のリンク集と、Three.js・AR.js・Cannon.js などで作ったサンプル。">
+  <meta property="og:url" content="https://daisukesudo.github.io/">
+  <meta property="og:image" content="https://daisukesudo.github.io/img/logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="./favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="site-logo">
-      <img class="site-logo__image" src="./img/logo.png" alt="logo"/>
+  <header class="hero">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <p class="hero-kicker">daisukesudo.github.io</p>
+      <h1 class="hero-name">Daisuke<br>Sudo</h1>
+      <nav aria-label="Links">
+        <ul class="links">
+          <li>
+            <a class="link" href="https://note.com/daisannoan">
+              <img src="./img/icons/note.svg" alt="" width="18" height="18">note
+            </a>
+          </li>
+          <li>
+            <a class="link" href="https://qiita.com/dsudo">
+              <img src="./img/icons/qiita.svg" alt="" width="18" height="18">Qiita
+            </a>
+          </li>
+          <li>
+            <a class="link" href="https://github.com/DaisukeSudo">
+              <img src="./img/icons/github.svg" alt="" width="18" height="18">GitHub
+            </a>
+          </li>
+          <li>
+            <a class="link" href="https://x.com/_dsudo">
+              <img src="./img/icons/x.svg" alt="" width="18" height="18">X
+            </a>
+          </li>
+          <li>
+            <a class="link" href="https://www.codewars.com/users/dsudo">
+              <img src="./img/icons/codewars.svg" alt="" width="18" height="18">Codewars
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <section class="drawing-section">
-    <canvas class="rotating-box-canvas" width="200" height="200"></canvas>
-  </section>
-
-  <section class="nav-section">
-    <nav>
-      <ul class="nav-list">
-
-        <li class="nav-list-item">
-          <a href="https://www.codewars.com/users/dsudo">
-            <img src="./img/simple-icons_codewars.svg"/>
-            <span>Codewars</span>
-          </a>
-        </li>
-
-        <li class="nav-list-item">
-          <a href="https://github.com/DaisukeSudo">
-            <i class="fab fa-github"></i>
-            <span>GitHub</span>
-          </a>
-        </li>
-
-        <li class="nav-list-item">
-          <a href="https://qiita.com/dsudo">
-            <i class="fa fa-search"></i>
-            <span>Qiita</span>
-          </a>
-        </li>
-
-        <li class="nav-list-item">
-          <a href="https://twitter.com/_dsudo">
-            <i class="fab fa-twitter"></i>
-            <span>Twitter</span>
-          </a>
-        </li>
-
-        <li class="nav-list-item">
-          <a href="https://daisuke-sudo.blogspot.com/">
-            <i class="fab fa-blogger"></i>
-            <span>Blogger</span>
-          </a>
-        </li>
-
-      </ul>
-    </nav>
-  </section>
+  <main class="works">
+    <h2 class="works-heading">Works</h2>
+    <ul class="work-grid">
+      <li class="work">
+        <a class="work-thumb" href="./samples/cannonjs/step3/" tabindex="-1" aria-hidden="true">
+          <img src="./img/works/cannonjs.jpg" alt="" width="720" height="480" loading="lazy">
+        </a>
+        <div class="work-body">
+          <p class="work-meta">2023 · Physics</p>
+          <h3 class="work-title">Cannon.js の世界へようこそ！</h3>
+          <p class="work-desc">物理エンジン cannon-es で物理シミュレーションを試す入門記事とサンプル。落ちてぶつかる物体から、キーボードで動かす車まで。</p>
+        </div>
+        <div class="work-links">
+          <p class="work-links-row">
+            <a class="chip chip--primary" href="https://qiita.com/dsudo/items/66f41ef514344afeec4e">記事</a>
+            <a class="chip" href="https://github.com/DaisukeSudo/daisukesudo.github.io/tree/main/samples/cannonjs">Source</a>
+          </p>
+          <p class="work-links-row">
+            <span class="work-links-label">Demo</span>
+            <span class="work-links-chips">
+              <a class="chip" href="./samples/cannonjs/step1/">Step1</a>
+              <a class="chip" href="./samples/cannonjs/step2/">Step2</a>
+              <a class="chip" href="./samples/cannonjs/step3/">Step3</a>
+            </span>
+          </p>
+        </div>
+      </li>
+      <li class="work">
+        <a class="work-thumb" href="https://qiita.com/dsudo/items/58718e9e3c870e6b92e6" tabindex="-1" aria-hidden="true">
+          <img src="./img/works/arjs.jpg" alt="" width="720" height="480" loading="lazy">
+        </a>
+        <div class="work-body">
+          <p class="work-meta">2022 · WebAR</p>
+          <h3 class="work-title">AR.js の世界へようこそ！</h3>
+          <p class="work-desc">マーカーや位置情報を使って、ブラウザだけで動く WebAR を作る入門記事とサンプル。</p>
+        </div>
+        <div class="work-links">
+          <p class="work-links-row">
+            <a class="chip chip--primary" href="https://qiita.com/dsudo/items/58718e9e3c870e6b92e6">記事</a>
+            <a class="chip" href="https://github.com/DaisukeSudo/daisukesudo.github.io/tree/main/samples/arjs">Source</a>
+          </p>
+          <p class="work-links-row">
+            <span class="work-links-label">Mobile</span>
+            <span class="work-links-chips">
+              <a class="chip" href="./samples/arjs/step1/">Step1</a>
+              <a class="chip" href="./samples/arjs/step2/">Step2</a>
+              <a class="chip" href="./samples/arjs/step3/">Step3</a>
+            </span>
+          </p>
+          <p class="work-links-row">
+            <span class="work-links-label">PC</span>
+            <span class="work-links-chips">
+              <a class="chip" href="./samples/arjs/step1/marker/" title="PC に表示して、Step1 を開いたスマホのカメラで映します">Step1 Marker</a>
+            </span>
+          </p>
+        </div>
+      </li>
+      <li class="work">
+        <a class="work-thumb" href="./samples/threejs/step4/" tabindex="-1" aria-hidden="true">
+          <img src="./img/works/threejs.jpg" alt="" width="720" height="480" loading="lazy">
+        </a>
+        <div class="work-body">
+          <p class="work-meta">2019 · 3D</p>
+          <h3 class="work-title">Three.js の世界へようこそ！</h3>
+          <p class="work-desc">3D の箱を表示して、回して、マウスで動かせるようにするまでの入門記事とサンプル。</p>
+        </div>
+        <div class="work-links">
+          <p class="work-links-row">
+            <a class="chip chip--primary" href="https://qiita.com/dsudo/items/42da9c7f45ed6147395e">記事</a>
+            <a class="chip" href="https://github.com/DaisukeSudo/daisukesudo.github.io/tree/main/samples/threejs">Source</a>
+          </p>
+          <p class="work-links-row">
+            <span class="work-links-label">Demo</span>
+            <span class="work-links-chips">
+              <a class="chip" href="./samples/threejs/step1/">Step1</a>
+              <a class="chip" href="./samples/threejs/step2/">Step2</a>
+              <a class="chip" href="./samples/threejs/step3/">Step3</a>
+              <a class="chip" href="./samples/threejs/step4/">Step4</a>
+            </span>
+          </p>
+        </div>
+      </li>
+    </ul>
+  </main>
 
   <footer class="site-footer">
-    <p class="copyright">Copyright 2020 Daisuke Sudo All Rights Reserved.</p>
+    <p>&copy; 2026 Daisuke Sudo</p>
   </footer>
 
-  <script src="https://unpkg.com/three@0.111.0/build/three.js"></script>
-  <script src="https://unpkg.com/three@0.111.0/examples/js/controls/OrbitControls.js"></script>
-  <script src="./samples/threejs/step4/app.js"></script>
-  <script>
-    window.onload = () => {
-      main(document.querySelector(".rotating-box-canvas"));
-    }
-  </script>
+  <script type="module" src="./js/hero.js"></script>
 </body>
-
 </html>
