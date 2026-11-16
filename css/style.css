@@ -365,3 +365,15 @@ ul {
     transform: none;
   }
 }
+
+/* ---------- 404 ---------- */
+
+.hero--full {
+  min-height: 100svh;
+}
+
+.hero-message {
+  max-width: 32em;
+  margin: -12px 0 28px;
+  color: var(--muted);
+}
