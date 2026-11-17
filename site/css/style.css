@@ -269,41 +269,12 @@ ul {
 }
 
 .work-links {
-  display: grid;
-  align-content: start;
-  gap: 10px;
-  padding: 18px 20px 20px;
-}
-
-.work-links-row {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: end;
   gap: 8px;
   margin: 0;
-}
-
-.work-links-row:has(.work-links-chips) {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: start;
-  gap: 10px;
-}
-
-.work-links-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.work-links-label {
-  min-width: 4.4em;
-  padding-top: 5px;
-  color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  padding: 18px 20px 20px;
 }
 
 .chip {

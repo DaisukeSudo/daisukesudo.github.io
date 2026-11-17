@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marker — Holo Foxes</title>
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../../../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #ffffff;
+      color: #1a1d24;
+      font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 240px;
+      align-items: center;
+      gap: 48px;
+      max-width: 1100px;
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    .marker {
+      display: block;
+      width: 100%;
+      max-width: min(100%, 76svh);
+      height: auto;
+      margin: 0 auto;
+      image-rendering: pixelated;
+    }
+
+    .side {
+      display: grid;
+      gap: 16px;
+    }
+
+    .back {
+      color: #6b7280;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.75rem;
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: 1.6rem;
+      line-height: 1.15;
+    }
+
+    ol {
+      margin: 0;
+      padding-left: 1.2em;
+      color: #374151;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .qr {
+      width: 180px;
+      padding: 8px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+    }
+
+    .qr svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .url {
+      margin: 0;
+      color: #6b7280;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.7rem;
+      word-break: break-all;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .qr-block {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="marker" src="../../step1/marker/marker.png" alt="AR マーカー" width="512" height="512">
+    <div class="side">
+      <a class="back" href="../">← Holo Foxes</a>
+      <h1>Marker</h1>
+      <ol>
+        <li>このページを PC に表示する</li>
+        <li class="qr-block">スマホで QR コードを読み取る</li>
+        <li>「AR で見る」を選び、カメラでマーカーを映す</li>
+      </ol>
+      <div class="qr-block">
+        <div class="qr" data-qr></div>
+      </div>
+      <p class="url qr-block" data-url></p>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+  <script>
+    const url = new URL('../?mode=ar', location.href).href;
+    document.querySelector('[data-url]').textContent = url;
+    const qr = qrcode(0, 'M');
+    qr.addData(url);
+    qr.make();
+    document.querySelector('[data-qr]').innerHTML = qr.createSvgTag(6, 0);
+  </script>
+</body>
+</html>

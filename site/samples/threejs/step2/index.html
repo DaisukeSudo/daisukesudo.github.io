@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hello Three.js World! Step2</title>
+  <link rel="stylesheet" href="../../step-nav.css">
   <style>
     #main {
       width: 480px;
@@ -15,6 +16,15 @@
 </head>
 <body>
   <canvas id="main"></canvas>
+  <nav class="step-nav" aria-label="Steps">
+    <a href="../step1/">Step1</a>
+    <a href="../step2/" aria-current="page">Step2</a>
+    <a href="../step3/">Step3</a>
+    <a href="../step4/">Step4</a>
+    <span class="step-nav-sep"></span>
+    <a href="../demo/">Demo</a>
+    <a href="https://qiita.com/dsudo/items/42da9c7f45ed6147395e">記事</a>
+  </nav>
   <script src="https://unpkg.com/three@0.111.0/build/three.js"></script>
   <script src="app.js"></script>
   <script>

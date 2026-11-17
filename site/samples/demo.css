@@ -1,0 +1,228 @@
+/* 各サンプルのデモページ共通の HUD */
+
+:root {
+  color-scheme: dark;
+  --hud-bg: rgba(10, 12, 20, 0.55);
+  --hud-border: rgba(255, 255, 255, 0.14);
+  --hud-text: #eef1f7;
+  --hud-muted: rgba(238, 241, 247, 0.62);
+  --hud-accent: #7c9cff;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-body: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #05060d;
+  color: var(--hud-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+.stage {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  outline: none;
+}
+
+/* ---------- layout ---------- */
+
+.hud {
+  position: fixed;
+  z-index: 10;
+  left: max(16px, env(safe-area-inset-left));
+  right: max(16px, env(safe-area-inset-right));
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  pointer-events: none;
+}
+
+.hud > * {
+  pointer-events: auto;
+}
+
+.hud-top {
+  top: max(16px, env(safe-area-inset-top));
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.hud-bottom {
+  bottom: max(16px, env(safe-area-inset-bottom));
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.panel {
+  padding: 12px 16px 14px;
+  border: 1px solid var(--hud-border);
+  border-radius: 14px;
+  background: var(--hud-bg);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* ---------- title ---------- */
+
+.hud-back {
+  display: inline-block;
+  margin-bottom: 4px;
+  color: var(--hud-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.hud-back:hover {
+  color: var(--hud-text);
+}
+
+.hud-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.hud-sub {
+  margin: 6px 0 0;
+  color: var(--hud-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- nav ---------- */
+
+.hud-nav {
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+}
+
+.hud-nav-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.hud-nav-label {
+  margin-right: 2px;
+  color: var(--hud-muted);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chip {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid var(--hud-border);
+  border-radius: 8px;
+  background: var(--hud-bg);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: var(--hud-text);
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.chip:hover {
+  border-color: var(--hud-accent);
+}
+
+.chip[aria-current="page"],
+.chip--primary {
+  border-color: transparent;
+  background: var(--hud-text);
+  color: #0c0e12;
+  font-weight: 500;
+}
+
+/* ---------- help ---------- */
+
+.hud-help {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 640px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--hud-border);
+  border-radius: 10px;
+  background: var(--hud-bg);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: var(--hud-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.hud-help kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--hud-border);
+  border-radius: 4px;
+  color: var(--hud-text);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.only-touch {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .only-touch {
+    display: revert;
+  }
+
+  .only-mouse {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hud-top {
+    flex-direction: column;
+  }
+
+  .hud-nav {
+    justify-items: start;
+  }
+
+  .hud-nav-row {
+    justify-content: flex-start;
+  }
+
+  .panel {
+    padding: 10px 12px 12px;
+  }
+}

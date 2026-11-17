@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dusk Drive — Cannon.js Demo</title>
+  <meta name="description" content="夕暮れの砂漠を走り、積み上げた箱を崩す。cannon-es の RaycastVehicle で作った物理デモ。">
+  <meta name="theme-color" content="#120c1c">
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+  <link rel="stylesheet" href="../../demo.css">
+  <style>
+    .hud-meter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .speed {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      text-align: right;
+    }
+
+    .speed small {
+      margin-left: 4px;
+      color: var(--hud-muted);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 400;
+    }
+
+    /* touch controls */
+    .pad {
+      position: fixed;
+      z-index: 11;
+      bottom: max(20px, env(safe-area-inset-bottom));
+      display: none;
+      gap: 12px;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+    }
+
+    .pad--left {
+      left: max(16px, env(safe-area-inset-left));
+    }
+
+    .pad--right {
+      right: max(16px, env(safe-area-inset-right));
+      flex-direction: column-reverse;
+    }
+
+    .pad button {
+      display: grid;
+      place-items: center;
+      width: 68px;
+      height: 68px;
+      padding: 0;
+      border: 1px solid var(--hud-border);
+      border-radius: 50%;
+      background: var(--hud-bg);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      color: var(--hud-text);
+      font-size: 1.4rem;
+      touch-action: none;
+    }
+
+    .pad button.is-active {
+      border-color: #ffb27a;
+      background: rgba(255, 140, 70, 0.35);
+    }
+
+    .pad button svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
+    }
+
+    @media (pointer: coarse) {
+      .pad {
+        display: flex;
+      }
+
+      .hud-bottom {
+        bottom: calc(max(20px, env(safe-area-inset-bottom)) + 164px);
+      }
+
+      .hud-bottom .hud-help {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="stage" aria-label="夕暮れの砂漠を走る車"></canvas>
+
+  <header class="hud hud-top">
+    <div class="panel">
+      <a class="hud-back" href="../../../">← Works</a>
+      <h1 class="hud-title">Dusk Drive</h1>
+      <p class="hud-sub">cannon-es · RaycastVehicle · Three.js</p>
+    </div>
+    <nav class="hud-nav" aria-label="サンプル">
+      <p class="hud-nav-row">
+        <span class="hud-nav-label">Steps</span>
+        <a class="chip" aria-current="page" href="./">Demo</a>
+        <a class="chip" href="../step1/">1</a>
+        <a class="chip" href="../step2/">2</a>
+        <a class="chip" href="../step3/">3</a>
+      </p>
+      <p class="hud-nav-row">
+        <a class="chip" href="https://qiita.com/dsudo/items/66f41ef514344afeec4e">記事</a>
+        <a class="chip" href="https://github.com/DaisukeSudo/daisukesudo.github.io/tree/main/site/samples/cannonjs/demo">Source</a>
+      </p>
+    </nav>
+  </header>
+
+  <footer class="hud hud-bottom">
+    <p class="hud-help">
+      <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / 矢印キーで運転・<kbd>Space</kbd> ブレーキ・<kbd>Shift</kbd> ブースト・<kbd>R</kbd> 立て直す・ドラッグで視点
+    </p>
+    <div class="hud-meter">
+      <button type="button" class="chip only-touch" data-action="reset">立て直す</button>
+      <div class="panel speed" aria-live="off"><span data-speed>0</span><small>km/h</small></div>
+    </div>
+  </footer>
+
+  <div class="pad pad--left" aria-hidden="true">
+    <button type="button" data-key="left"><svg viewBox="0 0 24 24"><path d="M15.5 4 7 12l8.5 8z"/></svg></button>
+    <button type="button" data-key="right"><svg viewBox="0 0 24 24"><path d="M8.5 4 17 12l-8.5 8z"/></svg></button>
+  </div>
+  <div class="pad pad--right" aria-hidden="true">
+    <button type="button" data-key="down"><svg viewBox="0 0 24 24"><path d="M4 8.5 12 17l8-8.5z"/></svg></button>
+    <button type="button" data-key="up"><svg viewBox="0 0 24 24"><path d="M4 15.5 12 7l8 8.5z"/></svg></button>
+  </div>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/",
+        "cannon-es": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"
+      }
+    }
+  </script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

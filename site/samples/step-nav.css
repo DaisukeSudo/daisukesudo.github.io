@@ -1,0 +1,31 @@
+/* 各 Step ページ共通のナビゲーション */
+
+.step-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: 480px;
+  margin: 16px 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.step-nav a {
+  padding: 4px 10px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  color: #444;
+  font-size: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.step-nav a:hover,
+.step-nav a[aria-current="page"] {
+  background-color: #444;
+  color: #fff;
+}
+
+.step-nav .step-nav-sep {
+  flex: 1;
+}

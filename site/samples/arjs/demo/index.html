@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Holo Foxes — AR.js Demo</title>
+  <meta name="description" content="マーカーの上にホログラムのステージと 4 匹のキツネが現れる。AR.js と A-Frame で作った WebAR デモ。">
+  <meta name="theme-color" content="#070914">
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+  <link rel="stylesheet" href="../../demo.css">
+  <style>
+    html,
+    body {
+      background: #070914;
+    }
+
+    /* AR.js はカメラ映像の <video> を body 直下に z-index: -2 で置く。
+       body に背景があると映像の上に塗られて隠れるので、AR モードでは透明にする */
+    body[data-mode="ar"] {
+      background: transparent;
+      touch-action: none;
+    }
+
+    /* カメラ映像と 3D の描画領域を入れる枠。中を拡大してもページ（HUD）に影響しないよう、はみ出しを切る */
+    .ar-view {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .ar-view a-scene,
+    .ar-view video {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .start {
+      position: fixed;
+      z-index: 5;
+      inset: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      place-items: center;
+      padding: 140px 16px 24px;
+      background:
+        radial-gradient(60% 50% at 50% 60%, rgba(60, 200, 255, 0.18), transparent 70%),
+        radial-gradient(80% 60% at 80% 10%, rgba(255, 120, 80, 0.16), transparent 70%),
+        #070914;
+      overflow-y: auto;
+    }
+
+    @media (max-width: 640px) {
+      .start {
+        padding-top: 200px;
+      }
+    }
+
+    .start[hidden] {
+      display: none;
+    }
+
+    .start-card {
+      width: min(440px, 100%);
+      text-align: center;
+    }
+
+    .start-lead {
+      margin: 0 0 24px;
+      color: var(--hud-muted);
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+
+    .start-actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .start-button {
+      display: block;
+      padding: 14px 18px;
+      border: 1px solid var(--hud-border);
+      border-radius: 12px;
+      background: var(--hud-bg);
+      color: var(--hud-text);
+      font: inherit;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .start-button small {
+      display: block;
+      margin-top: 2px;
+      color: var(--hud-muted);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+    }
+
+    .start-button:hover {
+      border-color: #5fe4ff;
+    }
+
+    .start-button--primary {
+      border-color: transparent;
+      background: linear-gradient(120deg, #5fe4ff, #7c9cff);
+      color: #061018;
+    }
+
+    .start-button--primary small {
+      color: rgba(6, 16, 24, 0.7);
+    }
+
+    .start-note {
+      margin: 18px 0 0;
+      color: var(--hud-muted);
+      font-size: 0.78rem;
+    }
+
+    .start-note a {
+      color: var(--hud-text);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffb45f;
+      box-shadow: 0 0 8px #ffb45f;
+    }
+
+    .status.is-tracking::before {
+      background: #5fe4ff;
+      box-shadow: 0 0 8px #5fe4ff;
+    }
+
+    .hud-bottom {
+      flex-wrap: wrap;
+    }
+
+    .hud-actions {
+      margin-left: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .hud-actions .chip {
+      padding: 8px 14px;
+      font-size: 0.82rem;
+    }
+
+    [data-mode-only] {
+      display: none;
+    }
+
+    body[data-mode="ar"] [data-mode-only~="ar"],
+    body[data-mode="preview"] [data-mode-only~="preview"] {
+      display: revert;
+    }
+
+    body:not([data-mode]) .hud-bottom {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="hud hud-top">
+    <div class="panel">
+      <a class="hud-back" href="../../../">← Works</a>
+      <h1 class="hud-title">Holo Foxes</h1>
+      <p class="hud-sub">AR.js · A-Frame · glTF</p>
+    </div>
+    <nav class="hud-nav" aria-label="サンプル">
+      <p class="hud-nav-row">
+        <span class="hud-nav-label">Steps</span>
+        <a class="chip" aria-current="page" href="./">Demo</a>
+        <a class="chip" href="../step0/">0</a>
+        <a class="chip" href="../step1/">1</a>
+        <a class="chip" href="../step2/">2</a>
+        <a class="chip" href="../step3/">3</a>
+      </p>
+      <p class="hud-nav-row">
+        <a class="chip" href="./marker/">Marker</a>
+        <a class="chip" href="https://qiita.com/dsudo/items/58718e9e3c870e6b92e6">記事</a>
+        <a class="chip" href="https://github.com/DaisukeSudo/daisukesudo.github.io/tree/main/site/samples/arjs/demo">Source</a>
+      </p>
+    </nav>
+  </header>
+
+  <section class="start" data-start>
+    <div class="start-card">
+      <p class="start-lead">
+        マーカーの上に、ホログラムのステージと<br>4 匹のキツネが現れる WebAR デモです。
+      </p>
+      <div class="start-actions">
+        <a class="start-button start-button--primary" href="?mode=ar">
+          AR で見る
+          <small>カメラを使い、マーカーを映します</small>
+        </a>
+        <a class="start-button" href="?mode=preview">
+          3D プレビュー
+          <small>カメラなしで、PC でもそのまま見られます</small>
+        </a>
+      </div>
+      <p class="start-note">
+        マーカーは <a href="./marker/">こちら</a>。PC に表示して、スマホのカメラで映してください。
+      </p>
+    </div>
+  </section>
+
+  <footer class="hud hud-bottom">
+    <p class="hud-help">
+      <span class="status" data-mode-only="ar" data-status>マーカーを探しています…</span>
+      <span data-mode-only="preview">ドラッグで回転・ホイール / ピンチでズーム</span>
+    </p>
+    <div class="hud-actions">
+      <button type="button" class="chip chip--primary" data-action="motion">Walk</button>
+      <a class="chip" href="./?mode=preview" data-mode-only="ar">3D プレビュー</a>
+      <a class="chip" href="./?mode=ar" data-mode-only="preview">AR で見る</a>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>

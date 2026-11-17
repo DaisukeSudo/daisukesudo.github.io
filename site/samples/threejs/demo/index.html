@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Neon Cube — Three.js Demo</title>
+  <meta name="description" content="水面に浮かぶネオンのキューブ。Three.js の Reflector と UnrealBloom で作ったデモ。">
+  <meta name="theme-color" content="#05060d">
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+  <link rel="stylesheet" href="../../demo.css">
+</head>
+<body>
+  <canvas class="stage" aria-label="水面に浮かぶネオンのキューブ"></canvas>
+
+  <header class="hud hud-top">
+    <div class="panel">
+      <a class="hud-back" href="../../../">← Works</a>
+      <h1 class="hud-title">Neon Cube</h1>
+      <p class="hud-sub">Three.js · Reflector · UnrealBloom</p>
+    </div>
+    <nav class="hud-nav" aria-label="サンプル">
+      <p class="hud-nav-row">
+        <span class="hud-nav-label">Steps</span>
+        <a class="chip" aria-current="page" href="./">Demo</a>
+        <a class="chip" href="../step1/">1</a>
+        <a class="chip" href="../step2/">2</a>
+        <a class="chip" href="../step3/">3</a>
+        <a class="chip" href="../step4/">4</a>
+      </p>
+      <p class="hud-nav-row">
+        <a class="chip" href="https://qiita.com/dsudo/items/42da9c7f45ed6147395e">記事</a>
+        <a class="chip" href="https://github.com/DaisukeSudo/daisukesudo.github.io/tree/main/site/samples/threejs/demo">Source</a>
+      </p>
+    </nav>
+  </header>
+
+  <footer class="hud hud-bottom">
+    <p class="hud-help">
+      <span class="only-mouse">ドラッグで回転・ホイールでズーム・キューブをクリック</span>
+      <span class="only-touch">ドラッグで回転・ピンチでズーム・キューブをタップ</span>
+    </p>
+  </footer>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
