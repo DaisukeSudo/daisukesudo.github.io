@@ -24,3 +24,14 @@ Qiita 記事「[AR.js の世界へようこそ！ ３歩でわかる お手軽 �
   - Rigging & Animation: tomkranis — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
   - glTF conversion: @AsoboStudio and @scurest — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
   - 変更点：サイズの調整、テクスチャの色相変更（step3 の 3 体）、バイナリとテクスチャの glTF への埋め込み
+
+## Demo: Holo Foxes
+
+[Holo Foxes](./demo/) は、記事の Step1（マーカーベース AR）と Step3 のキツネを組み合わせた全画面のデモです。
+
+- マーカーの上にホログラムのステージが現れ、4 匹のキツネが位置ピンと点線の弧で結ばれます。
+- ボタンで「立ち止まる → 歩く → 走る」を切り替えると、キツネがステージの上を回り始めます。
+- 最初の画面で 2 つのモードを選べます。
+  - **AR で見る**：スマホのカメラでマーカーを映します。
+  - **3D プレビュー**：カメラを使わずに表示します。ドラッグで回転、ホイール / ピンチでズームできます。
+- [マーカーページ](./demo/marker/)では、PC に表示したマーカーと、デモを開くための QR コードを並べています。マーカーは Step1 と同じものです。
